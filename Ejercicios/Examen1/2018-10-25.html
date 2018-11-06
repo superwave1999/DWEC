@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="2018-10-25.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div id='1' class='probar'>hola</div>
+    <p id='2' class='probar'>hola<span>adios</span></p>
+    <div id='3' class='probar'></div>
+    <p id='4' class='probar'>     hola<span>adios</span></p>
+    <p id='5' class='probar'><span>adios</span></p>
+    <div class="cerrado">
+        <p id="razones">Hay tres razones:</p>
+        <ul>
+            <li>Es gratuito</li>
+            <li>Te permite hacer más cosas en menos tiempo</li>
+            <li>Sus funciones son compatibles con todos los navegadores</li>
+        </ul>
+    </div>
+
+    <form action="procesar.php" method="post" name="formulario1" id="formulario1">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" size="30" maxLength="50" /> <br/>
+        <label for='apellidos'>Apellidos</label>
+        <input type='text' id='apellidos' name='ape' size='30' maxLength='50'/> <br/>
+        <label for="codPostal">Código postal</label>
+        <input type="text" id="codPostal" name="codPostal" caracteresPermitidos="0123456789" size='5' maxlength="5"><br/>
+        <input type="submit" value="Enviar" id="enviar">
+        <input type="reset" value="Limpiar">
+    </form>
+
+</body>
+
+</html>

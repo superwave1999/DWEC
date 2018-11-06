@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <form id="form" action="/action_page.txt" enctype="multipart/form-data" method="post">
+        <fieldset>
+          <legend>Formulario de alta</legend>
+          Nombre <br>
+          <input type="text" name="firstname"><br>
+          Contraseña <br>
+          <input type="password" name="password"><br>
+          Contraseña 2<br>
+          <input type="password" name="password2"><br>
+          Email <br>
+          <input type="text" name="email"><br>
+          Serso 
+          <input type="radio" name="gender" value="male" checked> Male<br>
+            <input type="radio" name="gender" value="female"> Female<br>
+
+          Fecha de nacimiento:  <input type="date" name="bday"><br>
+
+          Foto<br>
+          <input type="file" name="file"><br>
+          Bot test (2+2) 
+          <input type="text" name="test"><br>
+          Acepto los terminos y condiciones  <input type="checkbox" name="terms"><br><br>
+
+          <input type="reset" value="Reset">
+          <input type="submit" value="Submit">
+        </fieldset>
+      </form>
+</body>
+</html>

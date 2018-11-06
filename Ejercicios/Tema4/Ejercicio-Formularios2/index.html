@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Examen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Examen JavaScript</h1>
+
+    <form id="formulario">
+    <section class="pregunta">
+        <h3 class="enunciado">1: ¿ Cuánto es 5 + '5' ?</h3>
+        <div class="respuestas">
+            <input type="checkbox" name="q1_a" value="55" data-questionnaire="correct"> "55" <br>
+            <input type="checkbox" name="q1_b" value="10"> 10 <br>
+            <input type="checkbox" name="q1_c" value="java" data-questionnaire="correct"> Esto en java no pasa <br>
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">2: Tengo una variable declarada dentro de una funcion. var car = "Ford";</h3>
+        <div class="respuestas">
+            <input type="checkbox" name="q2_a" value="in" data-questionnaire="correct"> Es usable dentro de la funcion <br>
+            <input type="checkbox" name="q2_b" value="out"> Es usable fuera de la funcion <br>
+            <input type="checkbox" name="q2_c" value="for" data-questionnaire="correct"> Es usable dentro de un for que hay en la funcion <br>
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">3: La etiqueta async</h3>
+        <div class="respuestas">
+            <input type="radio" name="q3_ans" value="instant" data-questionnaire="correct"> Carga el script y la ejecuta al momento <br>
+            <input type="radio" name="q3_ans" value="after"> Carga el script y la ejecuta despues del HTML <br>
+            <input type="radio" name="q3_ans" value="cpu"> Permite el uso asincrono (varios hilos de CPU) de un script <br>
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">4: Para ser buen "programador" Javascript, como debería afrontar el codigo?</h3>
+        <div class="respuestas">
+            <input type="radio" name="q4_ans" value="java" data-questionnaire="correct">Como si fuese Java <br>
+            <input type="radio" name="q4_ans" value="script">Como si fuese un script <br>
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">5: ¿Como puedo asignar eventos a un elemento?</h3>
+        <div class="respuestas">
+            <select name="q5_ans">
+                    <option value="NC" data-questionnaire="default">--</option>
+                  <option value="clicked">elemento.clicked</option>
+                  <option value="listener" data-questionnaire="correct">elemento.addEventListener();</option>
+                  <option value="addevent">elemento.addEvent</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">6: En un array, ¿por que numero empieza su primer indice?</h3>
+        <div class="respuestas">
+            <select name="q6_ans">
+                    <option value="NC" data-questionnaire="default">--</option>
+                  <option value="0">0 (buen chico)</option>
+                  <option value="1">1 (pecado capital)</option>
+                  <option value="any" data-questionnaire="correct">El que el programador quiera</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">7: ¿Cual es el nombre de una librería que extiende la usabilidad de Javascript?</h3>
+        <div class="respuestas">
+            <select>
+                  <option value="NC" data-questionnaire="default">--</option>
+                  <option value="jquery" data-questionnaire="correct">Jquery</option>
+                  <option value="json">JSON</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">8: Nombre de etiqueta html que sirve para cargar un archivo Javascript </h3>
+        <div class="respuestas">
+            <input type="text" name="textbox" data-questionnaire="script" placeholder="Escriba su respuesta">
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">9: ¿Cual es la instrucción ya obsoleta para agregar codigo HTML a partir de un nodo padre?</h3>
+        <div class="respuestas">
+            <input type="text" name="text" data-questionnaire="innerHTML" placeholder="Escriba su respuesta">
+        </div>
+    </section>
+
+    <section class="pregunta">
+        <h3 class="enunciado">10 (libre): Dígame su opinion acerca de la utilidad de Javascript puro para webs</h3>
+        <div>
+            <textarea name="textarea" maxlength="100" class="textarea"></textarea><span id="lengthStat"></span>
+        </div>
+    </section>
+
+    <input type="submit" id="submit" value="Corregir">
+    <input type="reset" id="reset" value="Limpiar">
+
+</form>
+
+    <section class="stats">
+        <h4>Estadisticas del ultimo intento:</h4>
+        Tiempo perdido de tu vida:  <span id="timeStat"></span><br>
+        Contestadas:   <span id="ansStat"></span><br>
+        No contestadas: <span id="unansStat"></span><br>
+        Aciertos: <span id="corrStat"></span><br>
+        Porcentaje de aciertos: <span id="pcStat"></span><br>
+        Fails:  <span id="failStat"></span><br>
+
+        <p>El textarea al no ser corregible, no se computa para preguntas contestadas ni acertadas</p>
+        
+    </section>
+
+
+</body>
+</html>
