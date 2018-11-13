@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"> 
+    <title>Viajes Guiados</title>
+    <link rel="stylesheet" href="viajes.css">
+    <script type="text/javascript" src="script.js" defer></script>
+</head>
+<body>
+    <div id="tours">
+        <h1>Viajes guiados</h1>
+        <div class="francia tour" data-precio-dia="200">
+            <h2>París, Francia</h2>
+            <span>Precio:</span>
+            <span class="total">1400</span>
+            <span>€ por</span>
+            <span class="numero-noches">7</span>
+            <span>noches</span>
+            <br/>
+            <label for="noches-francia">Número de noches</label>
+            <input id="noches-francia" value="7" type="number">
+            <br/>
+            <button class="book">Reserve ahora</button>
+            <br/>
+        </div>
+        <div class="usa tour" data-precio-dia="300">
+            <h2>New York, USA</h2>
+            <span>Precio:</span>
+            <span class="total">2100</span>
+            <span>€ por</span>
+            <span class="numero-noches">7</span>
+            <span>noches</span>
+            <br/>
+            <label for="noches-usa">Número de noches</label>
+            <input id="noches-usa" value="7" type="number">
+            <br/>
+            <button class="book">Reserve ahora</button>
+        </div>
+        <div class="asia tour" data-precio-dia="400" data-nada='nada'>
+            <h2>Tokio, Japón</h2>
+            <span>Precio:</span>
+            <span class="total">2800</span>
+            <span>€ por</span>
+            <span class="numero-noches">7</span>
+            <span>noches</span>
+            <br/>
+            <label for="noches-tokio">Número de noches</label>
+            <input id="noches-tokio" value="7" type="number">
+            <br/>
+            <button class="book">Reserve ahora</button>
+        </div>
+        
+        <div>
+            <a href="#" class="ver-fotos">Ver fotos</a>
+            <ul class="fotos">
+                <li>
+                    <img src="fotos/paris1.jpg" height="100">
+                    <span>Arco del triunfo</span>
+                </li>
+                <li>
+                    <img src="fotos/paris2.jpg" height="100">
+                    <span>Torre Eiffel</span>
+                </li>
+                <li>
+                    <img src="fotos/paris3.jpg" height="100">
+                    <span>Notre Dame de Paris</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
