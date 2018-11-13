@@ -53,21 +53,8 @@
 
     function displayPhotos (e) {
         var target = e.target;
-        if (target.nodeName == "A") {
-            var photoList = target.nextElementSibling;
-
-            if (photoList.style.display=="") {
-                photoList.style.display = "block";
-            }
-
-
-            if (photoList.style.display == "none") {
-                photoList.style.display = "block";
-            } else if (photoList.style.display == "block") {
-                photoList.style.display = "none";
-            }
-
-        }
+        var photoList = target.nextElementSibling;
+        photoList.classList.toggle("hidden");
 
     }
 
