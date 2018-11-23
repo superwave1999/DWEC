@@ -1,39 +1,39 @@
 
 class Media {
 
-    constructor(titulo) {
-        this.titulo = titulo;
-        this.prestado = false;
-        this.valoraciones = new Array();
+    constructor(titel) {
+        this._titulo = titel;
+        this._prestado = false;
+        this._valoraciones = new Array();
 
     }
 
-    set titulo(titulo) {
-        this.titulo = titulo;
+    set titulo(tit) {
+        this._titulo = tit;
     }
 
-    set prestado(prestado) {
-        this.prestado = prestado;
+    set prestado(prest) {
+        this._prestado = prest;
     }
 
-    set valoraciones(valoraciones) {
-        this.prestado = valoraciones;
+    set valoraciones(valora) {
+        this._prestado = valora;
     }
 
     get titulo() {
-        return this.titulo;
+        return this._titulo;
     }
 
     get prestado() {
-        return this.prestado;
+        return this._prestado;
     }
 
     get valoraciones() {
-        return this.valoraciones;
+        return this._valoraciones;
     }
 
     getMediaValoraciones() {
-        var array = this.valoraciones;
+        var array = this._valoraciones;
         var sum = 0;
 
         for( var i = 0; i < array.length; i++ ){
@@ -46,15 +46,15 @@ class Media {
 
     cambiarEstadoPrestado(status) {
         if (status == 1 || status == true) {
-            prestado = true;
+            _prestado = true;
         } else {
-            prestado = false;
+            _prestado = false;
         }
     }
 
     addValoracion(newval) {
         if (!isNaN(newval)) {
-            this.valoraciones.push(newval);
+            this._valoraciones.push(newval);
         }
 
     }
@@ -66,25 +66,25 @@ class Libros extends Media {
 
     constructor(titulo, autor, paginas) {
         super(titulo);
-        this.autor = autor;
-        this.paginas = paginas;
+        this._autor = autor;
+        this._paginas = paginas;
 
     }
 
     set autor(autor) {
-        this.autor = autor;
+        this._autor = autor;
     }
 
     set paginas(paginas) {
-        this.paginas = paginas;
+        this._paginas = paginas;
     }
 
     get autor() {
-        return this.autor;
+        return this._autor;
     }
 
     get paginas() {
-        return this.paginas;
+        return this._paginas;
     }
 
 }
@@ -94,25 +94,25 @@ class Peliculas extends Media {
 
     constructor(titulo, director, runTime) {
         super(titulo);
-        this.director = director;
-        this.runTime = runTime;
+        this._director = director;
+        this._runTime = runTime;
 
     }
 
     set director(director) {
-        this.director = director;
+        this._director = director;
     }
 
     set runTime(runTime) {
-        this.runTime = runTime;
+        this._runTime = runTime;
     }
 
     get director() {
-        return this.director;
+        return this._director;
     }
 
     get runTime() {
-        return this.runTime;
+        return this._runTime;
     }
 
 }
@@ -121,30 +121,247 @@ class CD extends Media {
 
     constructor(titulo, artista, canciones) {
         super(titulo);
-        this.artista = artista;
-        this.canciones = canciones;
+        this._artista = artista;
+        this._canciones = canciones;
 
     }
 
     set artista(director) {
-        this.artista = director;
+        this._artista = director;
     }
 
     set canciones(canciones) {
-        this.canciones = canciones;
+        this._canciones = canciones;
     }
 
     get artista() {
-        return this.artista;
+        return this._artista;
     }
 
     get canciones() {
-        return this.canciones;
+        return this._canciones;
     }
 
 }
 
 
+var arrayLibros = new Array();
+var arrayPelis = new Array();
+var arrayCD = new Array();
 
-document.getElementById
+var addbox = document.getElementById("addbox");
+var addButton = document.getElementById("addbutton");
+var clrButton = document.getElementById("clrbutton");
+var selector = addbox.getElementsByTagName("select");
 
+selector[0].addEventListener("change",divDisplay);
+
+
+addButton.addEventListener("click", addItem);
+clrButton.addEventListener("click", clearAll);
+
+
+
+
+
+function divDisplay() {
+    var strUser = selector[0].options[selector[0].selectedIndex].value;
+
+    var boxLibro = document.getElementById("box_libro");
+    var boxPeli = document.getElementById("box_peli");
+    var boxMusi = document.getElementById("box_musi");
+
+    boxLibro.classList.add("hidden");
+    boxPeli.classList.add("hidden");
+    boxMusi.classList.add("hidden");
+    
+    switch (strUser) {
+        case "libro":
+        boxLibro.classList.remove("hidden");
+        break;
+        case "pelicula":
+        boxPeli.classList.remove("hidden");
+        break;
+        case "cd":
+        boxMusi.classList.remove("hidden");
+        break;
+        default:
+        boxLibro.classList.add("hidden");
+        boxPeli.classList.add("hidden");
+        boxMusi.classList.add("hidden");
+        break;
+    }
+
+}
+
+function addItem() {
+
+    var titulo = document.getElementsByName("titulo")[0].value;
+    var prestado = document.getElementsByName("prestado")[0].value;
+    var valoracion = document.getElementsByName("valoracion")[0].value;
+    var mediatype = document.getElementsByName("mediatype")[0].options[document.getElementsByName("mediatype")[0].selectedIndex].value;
+
+    if (mediatype=="libro") {
+        var var1 = document.getElementsByName("libro_autor")[0].value;
+        var var2 = document.getElementsByName("libro_pags")[0].value;
+
+        var nu = new Libros(titulo, var1, var2);
+        nu.prestado = prestado;
+        nu.addValoracion(valoracion);
+
+        arrayLibros.push(nu);
+        updateLibros();
+
+    } else if (mediatype=="pelicula") {
+        var var1 = document.getElementsByName("peli_dir")[0].value;
+        var var2 = document.getElementsByName("peli_length")[0].value;
+
+        var nu = new Peliculas(titulo, var1, var2);
+        nu.prestado = prestado;
+        nu.addValoracion(valoracion);
+
+        arrayPelis.push(nu);
+        updatePelis();
+
+
+
+    } else if (mediatype=="cd") {
+        var var1 = document.getElementsByName("musi_artista")[0].value;
+        var var2 = document.getElementsByName("musi_canciones")[0].value;
+
+        var nu = new CD(titulo, var1, var2);
+        nu.prestado = prestado;
+        nu.addValoracion(valoracion);
+
+        arrayCD.push(nu);
+        updateCD();
+
+    }
+
+
+}
+
+function updateLibros() {
+
+    var librosDiv = document.getElementById("libros");
+
+    while (librosDiv.firstChild) {
+        librosDiv.removeChild(librosDiv.firstChild);
+    }
+
+    for (var i=0; i<arrayLibros.length; i++) {
+
+        var v1 = arrayLibros[i].titulo;
+        var v2 = arrayLibros[i].autor;
+        var v3 = arrayLibros[i].paginas;
+        var v4 = arrayLibros[i].prestado;
+        var v5 = arrayLibros[i].valoraciones;
+
+        var newLi = document.createElement('li');
+
+        strng1 = v1 + ' de ' + v2 + ' con ' + v3 + 'páginas.' ;
+
+        if (v4) {
+            strng2 = ' Prestado. ';
+        } else {
+            strng2 = ' No prestado. '
+        }
+
+        strng3 = v5 + ' puntos.';
+
+        newLi.textContent = strng1 + strng2 + strng3;
+
+        librosDiv.appendChild(newLi);
+
+    }
+
+}
+
+function updatePelis() {
+
+    var pelisDiv = document.getElementById("peliculas");
+
+    while (pelisDiv.firstChild) {
+        pelisDiv.removeChild(pelisDiv.firstChild);
+    }
+
+    for (var i=0; i<arrayPelis.length; i++) {
+
+        var v1 = arrayPelis[i].titulo;
+        var v2 = arrayPelis[i].director;
+        var v3 = arrayPelis[i].runTime;
+        var v4 = arrayPelis[i].prestado;
+        var v5 = arrayPelis[i].valoraciones;
+
+        var newLi = document.createElement('li');
+
+        strng1 = v1 + ' de ' + v2 + ' con ' + v3 + 'minutos de duracion.' ;
+
+        if (v4) {
+            strng2 = ' Prestado. ';
+        } else {
+            strng2 = ' No prestado. '
+        }
+
+        strng3 = v5 + ' puntos.';
+
+        newLi.textContent = strng1 + strng2 + strng3;
+
+        pelisDiv.appendChild(newLi);
+
+    }
+
+}
+
+function updateCD() {
+
+    var cdDiv = document.getElementById("cd");
+
+    while (cdDiv.firstChild) {
+        cdDiv.removeChild(cdDiv.firstChild);
+    }
+
+    for (var i=0; i<arrayCD.length; i++) {
+
+        var v1 = arrayCD[i].titulo;
+        var v2 = arrayCD[i].director;
+        var v3 = arrayCD[i].runTime;
+        var v4 = arrayCD[i].prestado;
+        var v5 = arrayCD[i].valoraciones;
+
+        var newLi = document.createElement('li');
+
+        strng1 = v1 + ' de ' + v2 + ' con ' + v3 + 'minutos de duracion.' ;
+
+        if (v4) {
+            strng2 = ' Prestado. ';
+        } else {
+            strng2 = ' No prestado. '
+        }
+
+        strng3 = v5 + ' puntos.';
+
+        newLi.textContent = strng1 + strng2 + strng3;
+
+        cdDiv.appendChild(newLi);
+
+    }
+
+}
+
+function clearAll() {
+    var librosDiv = document.getElementById("libros");
+    var pelisDiv = document.getElementById("peliculas");
+    var cdDiv = document.getElementById("cd");
+
+    while (librosDiv.firstChild) {
+        librosDiv.removeChild(librosDiv.firstChild);
+    }
+    while (pelisDiv.firstChild) {
+        pelisDiv.removeChild(pelisDiv.firstChild);
+    }
+    while (cdDiv.firstChild) {
+        cdDiv.removeChild(cdDiv.firstChild);
+    }
+
+}

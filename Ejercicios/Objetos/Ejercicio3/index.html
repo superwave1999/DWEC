@@ -6,19 +6,59 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Prueba arrays</title>
+        <title>Tienda</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="styles.css">
         <script src="script.js" defer></script>
     </head>
     <body>
-        <h1>Prueba array prototype</h1>
-        <p>Array Inicial: <span id="start"></span></p>
+        <h1>Tienda de medios digitales</h1>
 
-        <p>Array primero: <span id="first"></span></p>
-        <p>Array ultimo: <span id="last"></span></p>
-        <p>Array compac: <span id="comp"></span></p>
-        <p>Array limpiao: <span id="clean"></span></p>
+            <div id="addbox">
+                    <input name="titulo" type="text" placeholder="titulo">
+                    <input name="prestado" nametype="checkbox" >Prestado<br>
+                    Review (para la demo no he usado arrays): <input type="number" name="valoracion" min="1" max="5">
+
+                <select name="mediatype" size="3">
+                            <option value="libro">Libro</option>
+                            <option value="pelicula">Pelicula</option>
+                            <option value="cd">CD</option>
+                </select>
+
+                <div id="box_libro" class="hidden">
+                        <input name="libro_autor" type="text" placeholder="autor">
+                        Páginas: <input type="number" name="libro_pags" min="1">
+
+                </div>
+                <div id="box_peli" class="hidden">
+                        <input name="peli_dir" type="text" placeholder="director">
+                        Longitud: <input name="peli_length" type="number" min="1">
+
+                </div>
+                <div id="box_musi" class="hidden">
+                        <input name="musi_artista" type="text" placeholder="artista">
+                        Canciones: <input name="musi_canciones" type="text" placeholder="1,2,3,4">
+
+                </div>
+
+                <button id="addbutton">Add item</button>
+                <button id="clrbutton">Clear all</button>
+            </div>
+
+
+
+
+        <div id="list">
+            <ul id="libros">
+
+            </ul>
+            <ul id="peliculas">
+
+            </ul>
+            <ul id="cd">
+
+            </ul>
+        </div>
     </body>
 </html>
