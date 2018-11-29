@@ -1,23 +1,12 @@
 class Validator {
 
-    _storedNode;
-    _tagName;
-    _inputtype;
-    _maxlength;
-    _minlength;
-
-    _attrcorrect;
-    _regex;
-    _isValid;
-
-
     constructor ($element, $maxLength = null, $minLength = null, $attrCorrect = 'data-validate-ok', $regex = null) {
 
         this._storedNode = $element;
 
         this._tagName = this._storedNode.tagName;
 
-        if (this._tagName == "input") {
+        if (this._tagName == "INPUT") {
             this._inputtype = this._storedNode.getAttribute('type');
 
         } else {
@@ -35,88 +24,88 @@ class Validator {
 
     }
 
-    get _storedNode() {
+    get storedNode() {
         return this._storedNode;
     }
 
-    get _tagName() {
+    get tagName() {
         return this._tagName;
     }
 
-    get _inputtype() {
+    get inputtype() {
         return this._inputtype;
     }
 
-    get _maxlength() {
+    get maxlength() {
         return this._maxlength;
     }
 
-    get _minlength() {
+    get minlength() {
         return this._minlength;
     }
 
-    get _attrcorrect() {
+    get attrcorrect() {
         return this._attrcorrect;
     }
 
-    get _regex() {
+    get regex() {
         return this._regex;
     }
 
-    get _isValid() {
+    get isValid() {
         return this._isValid;
     }
 
-    set _storedNode($var) {
+    set storedNode($var) {
         this._storedNode = $var;
     }
 
-    set _tagName($var) {
+    set tagName($var) {
         this._tagName = $var;
     }
 
-    set _inputtype($var) {
+    set inputtype($var) {
         this._inputtype = $var;
     }
 
-    set _maxlength($var) {
+    set maxlength($var) {
         this._maxlength = $var;
     }
 
-    set _minlength($var) {
+    set minlength($var) {
         this._minlength = $var;
     }
 
-    set _attrcorrect($var) {
+    set attrcorrect($var) {
         this._attrcorrect = $var;
     }
 
-    set _regex($var) {
+    set regex($var) {
         this._regex = $var;
     }
 
     doValidate() {
 
 
-        if (this._tagName=="select") {
+        if (this._tagName=="SELECT") {
 
             //Seems OK
             this.validateQuestionSelect();
 
 
-        } else if (this._tagName=="input" && this._inputtype=="checkbox") {
+        } else if (this._tagName=="INPUT" && this._inputtype=="radio") {
 
             //dolater
             //this.validateQuestionCheckbox();
             this.validateQuestionRadio();
 
-        } else if (this._tagName=="input" && this._inputtype=="radio") {
+        } else if (this._tagName=="INPUT" && this._inputtype=="checkbox") {
 
             //Seems ok
-            this.validateQuestionRadio();
+            this.validateQuestionCheckbox();
 
 
-        } else if (this._tagName=="input" && this._inputtype=="textbox") {
+        } else if (this._tagName=="INPUT" && this._inputtype=="text") {
 
             //Seems ok
             this.validateQuestionTextbox();
@@ -171,7 +160,7 @@ class Validator {
         // Checks if selected option has the token
         //for (var i = 0; i<select.length; i++) {
 
-            if (select.options[select.selectedIndex].getAttribute(corrTag) == "correct") {
+            if (select.options[select.selectedIndex].getAttribute(corrTag) != null) {
                 status = true;
             }
 
@@ -188,12 +177,12 @@ class Validator {
     validateQuestionTextbox () {
         // All options
         var txtbx = this._storedNode;
-        var corrTag = this._attrcorrect;
+        var corrTag = txtbx.dataset.check;
         var status = false;
-
+        
         // Checks if selected option has the token
         //for (var i = 0; i<opciones.length; i++) {
-            if (txtbx.value == txtbx.getAttribute(corrTag)) {
+            if (txtbx.value == corrTag) {
                 status = true;
             }
         //}
@@ -204,6 +193,42 @@ class Validator {
 
 }
 
+var button = document.getElementById('but');
+button.addEventListener('click', processVal);
+
+function processVal() {
+    var ck1 = document.getElementById('chk1');
+var valid = new Validator(ck1,null,null,'data-check');
+var ck1res = valid.doValidate();
+
+var ck1 = document.getElementById('chk2');
+var valid = new Validator(ck1,null,null,'data-check');
+var ck2res = valid.doValidate();
+
+var ck1 = document.getElementById('rd1');
+var valid = new Validator(ck1,null,null,'data-check');
+var rd1res = valid.doValidate();
+
+var ck1 = document.getElementById('rd2');
+var valid = new Validator(ck1,null,null,'data-check');
+var rd2res = valid.doValidate();
+
+var ck1 = document.getElementById('txtbx1');
+var valid = new Validator(ck1,null,null,'data-check');
+var tb1res = valid.doValidate();
+
+var ck1 = document.getElementById('sel1');
+var valid = new Validator(ck1,null,null,'data-check');
+var selres = valid.doValidate();
+
+var results = document.getElementById("results");
 
 
+results.innerHTML = 'Ck1: ' + ck1res +'<br>';
+results.innerHTML += 'Ck2: ' + ck2res +'<br>';
+results.innerHTML += 'Rd1: ' + rd1res +'<br>';
+results.innerHTML += 'Rd2: ' + rd2res +'<br>';
+results.innerHTML += 'Tb1: ' + tb1res +'<br>';
+results.innerHTML += 'Sel: ' + selres +'<br>';
 
+}

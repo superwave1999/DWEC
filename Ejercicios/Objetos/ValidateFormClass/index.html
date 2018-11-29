@@ -5,10 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="validate.js"></script>
+    <script src="validate.js" defer></script>
 </head>
 <body>
     <h1>Easy form</h1>
+    <input type="checkbox" id="chk1" name="chk1" data-check="OK">This is a correct box.<br>
+    <input type="checkbox" id="chk2" name="chk2">This is an incorrect box.<br>
+
+    <input type="radio" id="rd1" name="rd1" data-check="OK">Correct radiobutton.<br>
+    <input type="radio" id="rd2" name="rd1">Inorrect radiobutton.<br>
+
+    <input type="text" id="txtbx1" name="txtbx1" data-check="abcd" placeholder="abcd is correct"><br>
+
+    <select id="sel1">
+        <option value="k_dude" data-check="OK">OK</option>
+        <option value="lol">*cries in ES6*</option>
+    </select> <br>
+
+    <button id="but">Validar</button> <br>
+
+    <div id="results"></div>
 </body>
 </html>
