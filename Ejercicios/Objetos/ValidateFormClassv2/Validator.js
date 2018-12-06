@@ -1,4 +1,4 @@
-class Validator {
+export default class Validator {
 
     /*
     TODO: Write manual;
@@ -18,13 +18,13 @@ class Validator {
 
         this._results = new Array();
 
-
+        //this._doval = this.doValidate();
 
     }
 
     processNode() {
         //Stores inputs and selects in an array
-        var $formelements = null;
+        var $formelements = new Array();
         var $child = this._storedNode.children;
 
         for (var i=0; i<$child.length; i++) {
@@ -56,7 +56,9 @@ class Validator {
     }
 
     assignResetEvent() {
-        
+
+        var that = this;
+
         this._storedNode.addEventListener("reset", function (e) {
             e.preventDefault();
 
@@ -68,9 +70,12 @@ class Validator {
     }
 
     assignSubmitEvent() {
+
+        var that = this;
+
         this._storedNode.addEventListener("submit", function (e) {
             e.preventDefault();
-            this.doValidate();
+            that.doValidate();
 
         });
     }
@@ -80,30 +85,30 @@ class Validator {
         var $items = this._toCheck;
 
         for (var i=0; i<$items.length; i++) {
-            var $status="No question"
+            var $status="Not verifiable"
 
             if ($items[i].tagName=="SELECT") {
 
                 //Seems OK
-                $status = this.validateQuestionSelect();
+                $status = this.validateQuestionSelect($items[i]);
     
     
             } else if ($items[i].tagName=="INPUT" && $items[i].getAttribute('type')=="radio") {
     
                 //dolater
                 //this.validateQuestionCheckbox();
-                $status = this.validateQuestionRadio();
+                $status = this.validateQuestionRadio($items[i]);
     
             } else if ($items[i].tagName=="INPUT" && $items[i].getAttribute('type')=="checkbox") {
     
                 //Seems ok
-                $status = this.validateQuestionCheckbox();
+                $status = this.validateQuestionCheckbox($items[i]);
     
     
             } else if ($items[i].tagName=="INPUT" && $items[i].getAttribute('type')=="text") {
     
                 //Seems ok
-                $status = this.validateQuestionTextbox();
+                $status = this.validateQuestionTextbox($items[i]);
     
             }
 
@@ -125,7 +130,7 @@ class Validator {
         var status = false;
 
         //for (var i = 0; i<opciones.length; i++) {
-            if (checkbox.getAttribute(corrTag) != null) {
+            if (checkbox.getAttribute(corrTag) != null && checkbox.checked) {
                 status = true;
             }
         //}
@@ -195,58 +200,23 @@ class Validator {
         var $allResults = this._results;
         var $resultNode = this._statsNode;
 
-        for (var i=0; i>$allResults.length ; i++) {
+        while ($resultNode.firstChild) {
+            $resultNode.removeChild($resultNode.firstChild);
+        }
+
+        for (var i=0; i<$allResults.length ; i++) {
             var line = document.createElement('p');
             line.textContent = 'Item ' + i + ' of form: ' + $allResults[i];
             $resultNode.appendChild(line);
 
         }
 
+        
+
+        this._results = new Array();
 
     }
 
 
-
-}
-
-
-
-var button = document.getElementById('but');
-button.addEventListener('click', processVal);
-
-function processVal() {
-    var ck1 = document.getElementById('chk1');
-var valid = new Validator(ck1,null,null,'data-check');
-var ck1res = valid.doValidate();
-
-var ck1 = document.getElementById('chk2');
-var valid = new Validator(ck1,null,null,'data-check');
-var ck2res = valid.doValidate();
-
-var ck1 = document.getElementById('rd1');
-var valid = new Validator(ck1,null,null,'data-check');
-var rd1res = valid.doValidate();
-
-var ck1 = document.getElementById('rd2');
-var valid = new Validator(ck1,null,null,'data-check');
-var rd2res = valid.doValidate();
-
-var ck1 = document.getElementById('txtbx1');
-var valid = new Validator(ck1,null,null,'data-check');
-var tb1res = valid.doValidate();
-
-var ck1 = document.getElementById('sel1');
-var valid = new Validator(ck1,null,null,'data-check');
-var selres = valid.doValidate();
-
-var results = document.getElementById("results");
-
-
-results.innerHTML = 'Ck1: ' + ck1res +'<br>';
-results.innerHTML += 'Ck2: ' + ck2res +'<br>';
-results.innerHTML += 'Rd1: ' + rd1res +'<br>';
-results.innerHTML += 'Rd2: ' + rd2res +'<br>';
-results.innerHTML += 'Tb1: ' + tb1res +'<br>';
-results.innerHTML += 'Sel: ' + selres +'<br>';
 
 }
