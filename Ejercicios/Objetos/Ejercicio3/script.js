@@ -122,7 +122,9 @@ class CD extends Media {
     constructor(titulo, artista, canciones) {
         super(titulo);
         this._artista = artista;
-        this._canciones = canciones;
+
+        var splitted = canciones.split(", ");
+        this._canciones = splitted;
 
     }
 
@@ -142,7 +144,33 @@ class CD extends Media {
         return this._canciones;
     }
 
+
+    barajar() {
+
+        var songArr = this._canciones;
+
+        this._canciones = songArr.shuffle();
+
+    }
+
 }
+
+Array.prototype.shuffle = function() {
+    var input = this;
+     
+    for (var i = input.length-1; i >=0; i--) {
+     
+        var randomIndex = Math.floor(Math.random()*(i+1)); 
+        var itemAtIndex = input[randomIndex]; 
+         
+        input[randomIndex] = input[i]; 
+        input[i] = itemAtIndex;
+    }
+    return input;
+}
+
+
+
 
 
 var arrayLibros = new Array();
@@ -159,6 +187,10 @@ selector[0].addEventListener("change",divDisplay);
 
 addButton.addEventListener("click", addItem);
 clrButton.addEventListener("click", clearAll);
+
+
+
+document.getElementById('barajaCD').addEventListener('click', shuffleSongs);
 
 
 
@@ -197,7 +229,7 @@ function divDisplay() {
 function addItem() {
 
     var titulo = document.getElementsByName("titulo")[0].value;
-    var prestado = document.getElementsByName("prestado")[0].value;
+    var prestado = document.getElementsByName("prestado")[0].checked;
     var valoracion = document.getElementsByName("valoracion")[0].value;
     var mediatype = document.getElementsByName("mediatype")[0].options[document.getElementsByName("mediatype")[0].selectedIndex].value;
 
@@ -324,14 +356,14 @@ function updateCD() {
     for (var i=0; i<arrayCD.length; i++) {
 
         var v1 = arrayCD[i].titulo;
-        var v2 = arrayCD[i].director;
-        var v3 = arrayCD[i].runTime;
+        var v2 = arrayCD[i].artista;
+        var v3 = arrayCD[i].canciones;
         var v4 = arrayCD[i].prestado;
         var v5 = arrayCD[i].valoraciones;
 
         var newLi = document.createElement('li');
 
-        strng1 = v1 + ' de ' + v2 + ' con ' + v3 + 'minutos de duracion.' ;
+        strng1 = v1 + ' de ' + v2 + ' con las canciones: ' + v3 + '.' ;
 
         if (v4) {
             strng2 = ' Prestado. ';
@@ -363,5 +395,19 @@ function clearAll() {
     while (cdDiv.firstChild) {
         cdDiv.removeChild(cdDiv.firstChild);
     }
+
+}
+
+
+
+
+
+function shuffleSongs() {
+
+    for (var i=0; i<arrayCD.length; i++) {
+        arrayCD[i].barajar();
+    }
+
+    updateCD();
 
 }
