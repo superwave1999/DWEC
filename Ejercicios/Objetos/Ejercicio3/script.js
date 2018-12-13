@@ -1,3 +1,37 @@
+class Catalogo {
+
+    constructor(item) {
+
+        this._libros = new Array();
+        this._cds = new Array();
+        this._peliculas = new Array();
+
+        if (item instanceof Libros) {
+            this._libros.push(item);
+
+        } else if (item instanceof CD) {
+            this._cds.push(item);
+        } else if (item instanceof Peliculas) {
+            this._peliculas.push(item);
+        } else {
+            console.log(item + 'not added');
+        }
+
+    }
+
+    get libros() {
+
+    }
+
+    get libro(i) {
+
+    }
+
+    
+
+
+
+}
 
 class Media {
 

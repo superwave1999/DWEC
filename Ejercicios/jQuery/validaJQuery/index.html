@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="validate.js" defer></script>
+</head>
+<body>
+    <!--Validación de un formulario que contiene 2 campos email cuyo contenido debe ser un email válido y ser iguales entre ellos
+
+Añadir los span de "error" desde jquery
+
+Cancelar el envío en caso de que haya algún error
+-->
+    <form id="elForm">
+    <h1>Easy email form jquery</h1>
+
+    <p>Email</p>
+    <input type="text" id="txtbx1" name="txtbx1" placeholder="mail@domain.com"><br>
+    <p>Email confirm</p>
+    <input type="text" id="txtbx2" name="txtbx2" placeholder="mail@domain.com"><br>
+
+    <input id='submit' type="submit" value="Validar">
+    <input id='reset' type="reset" value="Reset">
+
+    </form>
+</body>
+</html>
