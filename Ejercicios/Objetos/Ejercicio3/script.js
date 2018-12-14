@@ -6,9 +6,11 @@ class Catalogo {
         this._cds = new Array();
         this._peliculas = new Array();
 
+    }
+
+    additem(item) {
         if (item instanceof Libros) {
             this._libros.push(item);
-
         } else if (item instanceof CD) {
             this._cds.push(item);
         } else if (item instanceof Peliculas) {
@@ -19,18 +21,85 @@ class Catalogo {
 
     }
 
+    removeitem(item) {
+        if (item instanceof Libros && isNaN(item)) {
+            var i = this._libros.length;
+            while (i--) {
+                if (item === this._libros) {
+                    this._libros.splice(i,1);
+                }
+            }
+
+        } else if (item instanceof CD && isNaN(item)) {
+            var i = this._cds.length;
+            while (i--) {
+                if (item === this._cds) {
+                    this._cds.splice(i,1);
+                }
+            }
+
+        } else if (item instanceof Peliculas && isNaN(item)) {
+            var i = this._peliculas.length;
+            while (i--) {
+                if (item === this._peliculas) {
+                    this._peliculas.splice(i,1);
+                }
+            }
+
+        } else {
+            console.log(item + 'not removed');
+        }
+    }
+
     get libros() {
-
+        return this._libros;
     }
 
-    get libro(i) {
-
+    libro(i) {
+        return this._libros[i];
     }
 
-    
+    set libros($set) {
+        this._libros = $set;
+    }
+
+    setlibro(i,$set) {
+        this._libros[i] = $set;
+    }
 
 
+    get cds() {
+        return this._cds;
+    }
 
+    cd(i) {
+        return this._cds[i];
+    }
+
+    set cds($set) {
+        this._cds = $set;
+    }
+
+    setcd(i,$set) {
+        this._cds[i] = $set;
+    }
+
+
+    get peliculas() {
+        return this._peliculas;
+    }
+
+    pelicula(i) {
+        return this._peliculas[i];
+    }
+
+    set peliculas($set) {
+        this._peliculas = $set;
+    }
+
+    setpelicula(i,$set) {
+        this._peliculas[i] = $set;
+    }
 }
 
 class Media {
@@ -205,11 +274,7 @@ Array.prototype.shuffle = function() {
 
 
 
-
-
-var arrayLibros = new Array();
-var arrayPelis = new Array();
-var arrayCD = new Array();
+var catalogo = new Catalogo();
 
 var addbox = document.getElementById("addbox");
 var addButton = document.getElementById("addbutton");
@@ -275,7 +340,8 @@ function addItem() {
         nu.prestado = prestado;
         nu.addValoracion(valoracion);
 
-        arrayLibros.push(nu);
+        catalogo.additem(nu);
+
         updateLibros();
 
     } else if (mediatype=="pelicula") {
@@ -286,7 +352,7 @@ function addItem() {
         nu.prestado = prestado;
         nu.addValoracion(valoracion);
 
-        arrayPelis.push(nu);
+        catalogo.additem(nu);
         updatePelis();
 
 
@@ -299,7 +365,7 @@ function addItem() {
         nu.prestado = prestado;
         nu.addValoracion(valoracion);
 
-        arrayCD.push(nu);
+        catalogo.additem(nu);
         updateCD();
 
     }
@@ -315,13 +381,13 @@ function updateLibros() {
         librosDiv.removeChild(librosDiv.firstChild);
     }
 
-    for (var i=0; i<arrayLibros.length; i++) {
+    for (var i=0; i<catalogo.libros.length; i++) {
 
-        var v1 = arrayLibros[i].titulo;
-        var v2 = arrayLibros[i].autor;
-        var v3 = arrayLibros[i].paginas;
-        var v4 = arrayLibros[i].prestado;
-        var v5 = arrayLibros[i].valoraciones;
+        var v1 = catalogo.libro(i).titulo;
+        var v2 = catalogo.libro(i).autor;
+        var v3 = catalogo.libro(i).paginas;
+        var v4 = catalogo.libro(i).prestado;
+        var v5 = catalogo.libro(i).valoraciones;
 
         var newLi = document.createElement('li');
 
@@ -351,13 +417,13 @@ function updatePelis() {
         pelisDiv.removeChild(pelisDiv.firstChild);
     }
 
-    for (var i=0; i<arrayPelis.length; i++) {
+    for (var i=0; i<catalogo.peliculas.length; i++) {
 
-        var v1 = arrayPelis[i].titulo;
-        var v2 = arrayPelis[i].director;
-        var v3 = arrayPelis[i].runTime;
-        var v4 = arrayPelis[i].prestado;
-        var v5 = arrayPelis[i].valoraciones;
+        var v1 = catalogo.pelicula(i).titulo;
+        var v2 = catalogo.pelicula(i).director;
+        var v3 = catalogo.pelicula(i).runTime;
+        var v4 = catalogo.pelicula(i).prestado;
+        var v5 = catalogo.pelicula(i).valoraciones;
 
         var newLi = document.createElement('li');
 
@@ -387,13 +453,13 @@ function updateCD() {
         cdDiv.removeChild(cdDiv.firstChild);
     }
 
-    for (var i=0; i<arrayCD.length; i++) {
+    for (var i=0; i<catalogo.cds.length; i++) {
 
-        var v1 = arrayCD[i].titulo;
-        var v2 = arrayCD[i].artista;
-        var v3 = arrayCD[i].canciones;
-        var v4 = arrayCD[i].prestado;
-        var v5 = arrayCD[i].valoraciones;
+        var v1 = catalogo.cd(i).titulo;
+        var v2 = catalogo.cd(i).artista;
+        var v3 = catalogo.cd(i).canciones;
+        var v4 = catalogo.cd(i).prestado;
+        var v5 = catalogo.cd(i).valoraciones;
 
         var newLi = document.createElement('li');
 
@@ -438,9 +504,15 @@ function clearAll() {
 
 function shuffleSongs() {
 
-    for (var i=0; i<arrayCD.length; i++) {
-        arrayCD[i].barajar();
+    //var arrayCD = catalogo.cds()
+
+    for (var i=0; i<catalogo.cds.length; i++) {
+        //arrayCD[i].barajar();
+
+        catalogo.cd(i).barajar();
     }
+
+    //catalogo.cds(arrayCD);
 
     updateCD();
 
