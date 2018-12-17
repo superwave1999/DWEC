@@ -9,7 +9,7 @@ $('#elForm').on("submit", function(event) {
 
     event.preventDefault();
 
-    var emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$"; 
+    var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
 
     var vEmail1 = $('#txtbx1').val().trim();
     var vEmail2 = $('#txtbx2').val().trim();
@@ -40,14 +40,11 @@ $('#elForm').on("submit", function(event) {
         $('#aviso2').text('');
     }
 
-    var em1 = $('#txtbx1').val();
-    var em2 = $('#txtbx2').val();
-
-    if (em1 == em2 && isEmail1 != null && isEmail2 != null) {
+    if (vEmail1 == vEmail2 && isEmail1 != null && isEmail2 != null) {
         alert('Enviado');
         return true;//event.submit();
         
-    } else if (em1 != em2) {
+    } else if (vEmail1 != vEmail2) {
         $('#aviso1').text('No coinciden');
         $('#aviso2').text('No coinciden');
     }
