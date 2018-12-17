@@ -26,7 +26,7 @@ class Catalogo {
             var i = this._libros.length;
             while (i--) {
                 if (item === this._libros) {
-                    this._libros.splice(i,1);
+                    this._libros.pop();
                 }
             }
 
@@ -34,7 +34,7 @@ class Catalogo {
             var i = this._cds.length;
             while (i--) {
                 if (item === this._cds) {
-                    this._cds.splice(i,1);
+                    this._cds.pop();
                 }
             }
 
@@ -42,7 +42,7 @@ class Catalogo {
             var i = this._peliculas.length;
             while (i--) {
                 if (item === this._peliculas) {
-                    this._peliculas.splice(i,1);
+                    this._peliculas.pop();
                 }
             }
 
@@ -485,6 +485,23 @@ function clearAll() {
     var librosDiv = document.getElementById("libros");
     var pelisDiv = document.getElementById("peliculas");
     var cdDiv = document.getElementById("cd");
+
+
+    for (var i=catalogo.libros.length; i>=0; i--) {
+        var rem = catalogo.libro(i);
+        catalogo.removeitem(rem);
+    }
+
+    for (var i=catalogo.peliculas.length; i>=0; i--) {
+        var rem = catalogo.pelicula(i);
+        catalogo.removeitem(rem);
+    }
+
+    for (var i=catalogo.cds.length; i>=0; i--) {
+        var rem = catalogo.cd(i);
+        catalogo.removeitem(rem);
+    }
+
 
     while (librosDiv.firstChild) {
         librosDiv.removeChild(librosDiv.firstChild);

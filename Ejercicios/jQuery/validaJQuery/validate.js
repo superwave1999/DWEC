@@ -1,22 +1,41 @@
-$('#submit').click(function(event) {
+(function(){
+
+$('#elForm').on("submit", function(event) {
+
+    var that = this;
 
     $('#aviso1').text('');
     $('#aviso2').text('');
 
     event.preventDefault();
 
-    var emailRegex = '^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$'; 
+    var emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$"; 
 
-    var isEmail1 = $('#txtbx1').val().match(emailRegex);
-    var isEmail2 = $('#txtbx2').val().match(emailRegex);
+    var vEmail1 = $('#txtbx1').val().trim();
+    var vEmail2 = $('#txtbx2').val().trim();
 
-    if (!isEmail1) {
+    var isEmail1 = vEmail1.match(emailRegex);
+    var isEmail2 = vEmail2.match(emailRegex);
+    
+    if (isEmail1==null) {
         $('#aviso1').text('No es direccion valida');
     } else {
         $('#aviso1').text('');
     }
-    if (!isEmail2) {
+    if (isEmail2==null) {
         $('#aviso2').text('No es direccion valida');
+    } else {
+        $('#aviso2').text('');
+    }
+
+    if(vEmail1==null || vEmail1=='') {
+        $('#aviso1').text('Vacio');
+    } else {
+        $('#aviso1').text('');
+    }
+
+    if (vEmail2==null || vEmail2=='') {
+        $('#aviso2').text('Vacio');
     } else {
         $('#aviso2').text('');
     }
@@ -24,26 +43,23 @@ $('#submit').click(function(event) {
     var em1 = $('#txtbx1').val();
     var em2 = $('#txtbx2').val();
 
-    if (em1 == em2 && isEmail1 && isEmail2) {
-        this.submit();
+    if (em1 == em2 && isEmail1 != null && isEmail2 != null) {
+        alert('Enviado');
+        return true;//event.submit();
+        
     } else if (em1 != em2) {
         $('#aviso1').text('No coinciden');
         $('#aviso2').text('No coinciden');
-
     }
-
-
 
 });
 
-$('#reset').click(function(event) {
-    
-    if (confirm('Resetear?')) {
-        this.reset();
-    } else {
+$('#elForm').on("reset", function(event) {
+    if (!confirm('Resetear?')) {
         event.preventDefault();
+    } else {
+        return true;
     }
-
 });
 
 
@@ -51,3 +67,20 @@ $('#reset').click(function(event) {
 
 $('<span id="aviso1"></span>').insertAfter('#txtbx1');
 $('<span id="aviso2"></span>').insertAfter('#txtbx2');
+
+
+
+})();
+
+
+
+
+/*
+Reset and Submit on form OK
+
+Añadir mensaje de vacio OK
+
+utiliza patrón módulo OK
+
+utiliza trim() para quitarle los espacios a los campos antes de la validación OK
+*/
