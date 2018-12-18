@@ -1,52 +1,18 @@
 (function(){
 
-$('#elForm').on("submit", function(event) {
+$('#elForm').on("submit", function(event) {    
 
-    var that = this;
+    var vEmail1 = validaCorreo('txtbx1', 'No es una direccion valida');
+    var vEmail2 = validaCorreo('txtbx2', 'No es una direccion valida');
 
-    $('#aviso1').text('');
-    $('#aviso2').text('');
-
-    event.preventDefault();
-
-    var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
-
-    var vEmail1 = $('#txtbx1').val().trim();
-    var vEmail2 = $('#txtbx2').val().trim();
-
-    var isEmail1 = vEmail1.match(emailRegex);
-    var isEmail2 = vEmail2.match(emailRegex);
-    
-    if (isEmail1==null) {
-        $('#aviso1').text('No es direccion valida');
-    } else {
-        $('#aviso1').text('');
-    }
-    if (isEmail2==null) {
-        $('#aviso2').text('No es direccion valida');
-    } else {
-        $('#aviso2').text('');
-    }
-
-    if(vEmail1==null || vEmail1=='') {
-        $('#aviso1').text('Vacio');
-    } else {
-        $('#aviso1').text('');
-    }
-
-    if (vEmail2==null || vEmail2=='') {
-        $('#aviso2').text('Vacio');
-    } else {
-        $('#aviso2').text('');
-    }
-
-    if (vEmail1 == vEmail2 && isEmail1 != null && isEmail2 != null) {
+    if (vEmail1 && vEmail2 && ($('#txtbx1').val() == $('#txtbx2').val())) {
         alert('Enviado');
-        return true;//event.submit();
-        
-    } else if (vEmail1 != vEmail2) {
-        $('#aviso1').text('No coinciden');
-        $('#aviso2').text('No coinciden');
+    } else if ($('#txtbx1').val() != $('#txtbx2').val()) {
+        $('#txtbx1_v').text('No coinciden');
+        $('#txtbx2_v').text('No coinciden');
+        event.preventDefault();
+    } else {
+        event.preventDefault();
     }
 
 });
@@ -54,30 +20,44 @@ $('#elForm').on("submit", function(event) {
 $('#elForm').on("reset", function(event) {
     if (!confirm('Resetear?')) {
         event.preventDefault();
-    } else {
-        return true;
     }
 });
 
 
 /*Function end*/
 
-$('<span id="aviso1"></span>').insertAfter('#txtbx1');
-$('<span id="aviso2"></span>').insertAfter('#txtbx2');
+function addSpan(idname) {
+    $('<span id="'+idname+'_v"></span>').insertAfter('#'+idname);
+}
 
 
+
+
+function validaCorreo(id, mensaje) {
+
+    var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
+    var element = $('#'+id);
+    var text = element.val();
+
+    $('#'+id+'_v').text('');
+
+    var status = false;
+
+    if (text==null || text=='') {
+        $('#'+id+'_v').text('Esta vacio');
+    } else {
+        status = emailRegex.test(element.val().trim());
+        if (status) {
+            $('#'+id+'_v').text('');
+        } else {
+            $('#'+id+'_v').text(mensaje);
+        }
+    }
+    return status;
+}
+
+
+addSpan('txtbx1');
+addSpan('txtbx2');
 
 })();
-
-
-
-
-/*
-Reset and Submit on form OK
-
-Añadir mensaje de vacio OK
-
-utiliza patrón módulo OK
-
-utiliza trim() para quitarle los espacios a los campos antes de la validación OK
-*/
