@@ -9,16 +9,19 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles.css"/>
     </head>
     <body>
-        <h1>Aemet - Prevision en Granada</h1>
-        <p id="altitud"></p>
-        <p id="indicativo"></p>
-        <p id="indsinop"></p>
-        <p id="latitud"></p>
-        <p id="longitud"></p>
+        <h1>Aemet - Prevision en <span id="location"></span> a <span id='date'></span></h1>
+
+        <div id="contenedorTabla"></div>
 
         <button id='refBtn'>Actualizar</button>
+
+        <footer>
+            <p id="copy"></p>
+            <p id="source"></p>
+        </footer>
         
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
         <script src="script.js" async defer></script>
