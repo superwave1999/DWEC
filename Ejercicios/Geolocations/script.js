@@ -61,25 +61,21 @@ function displayGranada() {
 
 }
 
-function displayCurrent() {
-    if (liveTrackingId != null) {
-        navigator.geolocation.clearWatch(liveTrackingId);
-    }
-    renderMap(myPosition);
-}
-
-
-
 //Renderiza el mapa
 var renderMap = function ($location) {
+    var divMapa = document.getElementById("mapa");
+    
     var opcionesMapa = {
-        zoom: $location.zoom,
+        zoom: 15,
         //center: googleLatLong
         center: {lat: $location.latitude, 
                  lng: $location.longitude},
         mapTypeId: google.maps.MapTypeId.HYBRID 
     };
-    var divMapa = document.getElementById("mapa");
+    
+    
+    
+    //if ($location.coords.zoom == null || $location.coords.zoom == '') { $location.coords.zoom = 12 };
     var mapa = new google.maps.Map(divMapa, opcionesMapa);
   // var mapa = new google.maps.Map(divMapa, {zoom: 8, center: {lat: -34.397, lng: 150.644}});
 }
@@ -93,7 +89,7 @@ function goodPos(position) {
         longitude: position.coords.longitude,
     };
 
-    displayCurrent();
+    renderMap(position.coords);
     distanceBetweenTwo(myPosition);
 }
 
